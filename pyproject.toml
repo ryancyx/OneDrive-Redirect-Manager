@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "onedrive-redirector"
+version = "0.1.0"
+description = "Lightweight Windows OneDrive folder redirection manager."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "--basetemp=pytest_tmp_runtime_v3"
+cache_dir = "pytest_cache_runtime_v3"
