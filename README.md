@@ -1,6 +1,6 @@
 # OneDrive Redirect Manager ☁️🔗
 
-**OneDrive Redirect Manager** 是一款面向 Windows 用户的轻量级目录重定向管理工具。软件用于管理若干条：
+这是一款基于 Windows 11 操作系统的目录重定向管理工具。可以管理若干条：
 
 ```text
 本地源文件夹 → OneDrive 目标文件夹
@@ -8,14 +8,14 @@
 
 的目录重定向关系。
 
-软件会在本地原路径创建 Windows `junction` 链接，使原软件继续访问原来的本地路径，而真实数据保存在 OneDrive 中，从而借助 OneDrive 实现文件同步。
+软件会在本地原路径创建 Windows `junction` 链接，原软件可继续访问原来的本地路径，而真实数据保存在 OneDrive 中，以借助 OneDrive 实现文件同步。
 
 ```text
 原软件访问的本地路径
 D:\Games\ExampleGame\SaveData
         ↓ junction 链接
 OneDrive 中保存真实数据的位置
-D:\RyanC\OneDrive\应用\Saved\ODR\data\example-game
+%OneDrive% data\example-game
 ```
 
 当前稳定版本为 **v1.0.5 绿色版**，主要面向游戏存档、软件配置目录和固定路径数据目录的 OneDrive 同步管理。
@@ -26,7 +26,7 @@ D:\RyanC\OneDrive\应用\Saved\ODR\data\example-game
 
 ### Windows 绿色版
 
-> 当前发布形式为 **v1.0.5 绿色版**。推荐普通用户使用绿色版，无需配置 Python 环境，解压后即可运行。
+> 当前发布形式为 **v1.0.5 绿色版**。解压后即可运行。
 
 在 GitHub Release 页面下载：
 
@@ -41,15 +41,16 @@ OneDriveRedirectManager_v1.0.5_windows_x64_green.zip
 3. 进入解压后的目录
 4. 双击运行 `OneDriveRedirectManager.exe`
 
-注意：请不要只复制单个 `.exe` 文件。绿色版运行需要保留同目录下的 `_internal` 文件夹。
+注意：请不要只复制单个 `.exe` 文件。需要保留同目录下的 `_internal` 文件夹。
+
 
 ---
 
 ## 🎯 项目定位
 
-OneDrive Redirect Manager 不是通用云同步软件，也不是多平台同步库管理器。它专注于一个明确场景：
+OneDrive Redirect Manager 只专注一个场景：
 
-> 将原本只能保存在固定本地路径的数据，通过 junction 链接重定向到 OneDrive 中保存和同步。
+> 将原本只能保存在固定本地路径的数据，通过 junction 链接重定向到 OneDrive 中，从而实现云端保存和同步。
 
 软件当前重点支持：
 
