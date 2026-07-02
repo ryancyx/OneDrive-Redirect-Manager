@@ -189,3 +189,27 @@ def test_delete_cloud_rejects_parent_escape(tmp_path: Path) -> None:
     service, root = make_service(tmp_path)
     with pytest.raises(Exception):
         service._get_safe_cloud_delete_path(root, "data/../../escape")
+
+
+def test_delete_project_includes_underlying_cloud_delete_error(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    service, root = make_service(tmp_path)
+    local_parent = tmp_path / "ODR_LocalTest"
+    local_parent.mkdir()
+    local_link = local_parent / "LocalConflict"
+    local_link.mkdir()
+    add_project(root, local_path=str(local_link))
+    cloud_target = root / "data" / "cloud-conflict"
+    cloud_target.mkdir(parents=True)
+
+    def fake_remove_tree(path: Path) -> None:
+        raise RuntimeError("rmdir fallback still failed")
+
+    monkeypatch.setattr(project_service_module, "remove_tree", fake_remove_tree)
+
+    with pytest.raises(RuntimeError, match="删除 OneDrive 目标文件夹失败：") as exc_info:
+        service.delete_project("conflict-test", True, False)
+
+    message = str(exc_info.value)
+    assert f"路径：{cloud_target}" in message
+    assert "原因：rmdir fallback still failed" in message
+    assert ProjectStore(root).load().get_project("conflict-test") is not None

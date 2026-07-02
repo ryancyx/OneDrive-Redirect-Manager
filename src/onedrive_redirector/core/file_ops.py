@@ -1,7 +1,14 @@
 from __future__ import annotations
 
+import logging
+import os
 import shutil
+import subprocess
 from pathlib import Path
+
+from .junction_ops import is_junction_or_reparse_point
+
+logger = logging.getLogger(__name__)
 
 
 def ensure_dir(path: Path) -> Path:
@@ -60,5 +67,35 @@ def copy_directory_contents(source: Path, target: Path) -> None:
 
 
 def remove_tree(path: Path) -> None:
-    if path.exists():
-        shutil.rmtree(path)
+    target = Path(path)
+
+    if not target.exists() and not is_junction_or_reparse_point(target):
+        return
+    if is_junction_or_reparse_point(target):
+        raise RuntimeError("目标是链接入口，不允许作为云端目录递归删除")
+
+    try:
+        shutil.rmtree(target)
+    except Exception as exc:
+        logger.warning(
+            "shutil.rmtree failed for %s: %s; attempting Windows rmdir fallback",
+            target,
+            exc,
+        )
+        if os.name != "nt":
+            logger.exception("Directory deletion failed without Windows fallback: %s", target)
+            raise RuntimeError(f"删除目录失败：{target}；原因：{exc}") from exc
+
+        result = subprocess.run(
+            ["cmd", "/c", "rmdir", "/S", "/Q", str(target)],
+            capture_output=True,
+            text=True,
+            shell=False,
+            check=False,
+        )
+        if target.exists():
+            stderr = (result.stderr or "").strip()
+            stdout = (result.stdout or "").strip()
+            details = stderr or stdout or str(exc)
+            logger.error("Windows rmdir fallback failed for %s: %s", target, details)
+            raise RuntimeError(f"删除目录失败：{target}；原因：{details}") from exc

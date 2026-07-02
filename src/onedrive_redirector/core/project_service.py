@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 import os
@@ -254,17 +254,17 @@ class ProjectService:
         if local_link_path is not None:
             try:
                 remove_junction(local_link_path)
-            except Exception:
+            except Exception as exc:
                 logger.exception("Failed to delete local junction for project %s: %s", project.id, local_link_path)
-                raise RuntimeError(f"删除本地链接失败：{local_link_path}")
+                raise RuntimeError(f"删除本地链接失败：{local_link_path}") from exc
             logger.info("Deleted local junction: %s", local_link_path)
 
         if cloud_path is not None:
             try:
                 remove_tree(cloud_path)
-            except Exception:
+            except Exception as exc:
                 logger.exception("Failed to delete cloud target for project %s: %s", project.id, cloud_path)
-                raise RuntimeError(f"删除 OneDrive 目标文件夹失败：{cloud_path}")
+                raise RuntimeError(f"删除 OneDrive 目标文件夹失败：\n路径：{cloud_path}\n原因：{exc}") from exc
             logger.info("Deleted cloud target: %s", cloud_path)
 
         store.delete_project(project.id)
@@ -294,3 +294,5 @@ class ProjectService:
         logger.info("Copied cloud data back to local: %s -> %s", cloud_path, local_path)
         store.delete_project(project.id)
         logger.info("Removed project config after restore: %s", project.id)
+
+
