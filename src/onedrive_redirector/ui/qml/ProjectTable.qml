@@ -38,7 +38,7 @@ Item {
                 Text { Layout.preferredWidth: root.idWidth; text: "项目 ID"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
                 Text { Layout.preferredWidth: root.nameWidth; text: "名称"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
                 Text { Layout.preferredWidth: root.localWidth; text: "本地源文件夹"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
-                Text { Layout.preferredWidth: root.cloudWidth; text: "OneDrive 路径"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
+                Text { Layout.preferredWidth: root.cloudWidth; text: "Cloud 路径"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
                 Text { Layout.preferredWidth: root.statusWidth; text: "运行状态"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
             }
         }

@@ -237,9 +237,9 @@ class AppController(QObject):
             return
 
         self._queue_task(
-            "正在更新 OneDrive 根目录，请稍候。",
+            "正在更新 Cloud 工作目录，请稍候。",
             lambda selected_path=path: self.service.save_onedrive_root(selected_path),
-            success_message="已更新 OneDrive 根目录。",
+            success_message="已更新 Cloud 工作目录。",
             refresh_projects=True,
             refresh_root=True,
         )
@@ -284,7 +284,7 @@ class AppController(QObject):
     @Slot(str, bool, bool)
     def deleteProject(self, project_id: str, delete_cloud: bool, delete_local_link: bool) -> None:
         self._queue_task(
-            "正在删除项目，请不要关闭软件。OneDrive 正在同步时可能需要几秒钟。",
+            "正在删除项目，请不要关闭软件。云盘客户端正在同步时可能需要几秒钟。",
             lambda target_id=project_id, cloud=delete_cloud, local=delete_local_link: self.service.delete_project(target_id, cloud, local),
             success_message="已删除项目。",
             refresh_projects=True,

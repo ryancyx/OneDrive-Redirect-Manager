@@ -29,10 +29,10 @@ def main() -> int:
     setup_logging()
 
     app = QApplication(sys.argv)
-    app.setApplicationName("OneDrive Redirect Manager")
+    app.setApplicationName("Cloud Redirect Manager")
     app.setOrganizationName("Ryan Cheung")
 
-    icon_path = _resource_path("assets/OneDriveRedirectManager.ico")
+    icon_path = _resource_path("assets/CloudRedirectManager.ico")
     app_icon = QIcon(str(icon_path)) if icon_path.exists() else QIcon()
 
     # This sets the application/taskbar/default window icon.
@@ -46,7 +46,7 @@ def main() -> int:
         window.show()
         app.main_window = window
     except Exception as exc:
-        QMessageBox.critical(None, "OneDrive Redirect Manager", f"主界面加载失败：{exc}")
+        QMessageBox.critical(None, "Cloud Redirect Manager", f"主界面加载失败：{exc}")
         return 1
 
     return app.exec()

@@ -93,3 +93,18 @@ def test_store_rejects_parent_escape_cloud_path(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError):
         store.add_project(project)
+
+
+def test_store_loads_utf8_bom_config(tmp_path: Path) -> None:
+    store = ProjectStore(tmp_path / "OneDriveRedirector")
+    store.ensure_root()
+
+    store.config_path.write_text(
+        '{"version": 1, "projects": []}',
+        encoding="utf-8-sig",
+    )
+
+    config = store.load()
+
+    assert config.version == 1
+    assert config.projects == []

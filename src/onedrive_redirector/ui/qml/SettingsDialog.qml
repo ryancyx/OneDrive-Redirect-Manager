@@ -58,7 +58,7 @@ Dialog {
 
                     Text {
                         Layout.fillWidth: true
-                        text: "选择 OneDrive 工作目录。项目配置保存在该目录，日志保存在本机 AppData。"
+                        text: "选择 Cloud 工作目录。项目配置保存在该目录，日志保存在本机 AppData。"
                         color: "#64748b"
                         font.pixelSize: 14
                         wrapMode: Text.WordWrap
@@ -88,7 +88,7 @@ Dialog {
                             spacing: 10
 
                             Text {
-                                text: root.currentRoot ? "当前 OneDrive 根目录" : "尚未设置 OneDrive 根目录"
+                                text: root.currentRoot ? "当前 Cloud 工作目录" : "尚未设置 Cloud 工作目录"
                                 color: root.currentRoot ? "#1d4ed8" : "#b45309"
                                 font.pixelSize: 14
                                 font.weight: Font.Bold
@@ -97,7 +97,7 @@ Dialog {
                             Text {
                                 id: pathText
                                 Layout.fillWidth: true
-                                text: root.currentRoot || "请点击下方按钮，通过系统资源管理器选择一个 OneDrive 工作目录。"
+                                text: root.currentRoot || "请点击下方按钮，通过系统资源管理器选择一个 Cloud 工作目录。"
                                 color: "#334155"
                                 font.pixelSize: 15
                                 wrapMode: Text.WrapAnywhere
@@ -127,7 +127,7 @@ Dialog {
 
                             Text {
                                 Layout.fillWidth: true
-                                text: "点击“更改 OneDrive 根目录”会打开系统目录选择器，不需要手动复制路径。建议选择 OneDrive 内专门用于本工具的工作目录。"
+                                text: "点击“更改 Cloud 工作目录”会打开系统目录选择器，不需要手动复制路径。建议选择云盘目录内专门用于本工具的 Cloud 工作目录。"
                                 color: "#64748b"
                                 font.pixelSize: 13
                                 wrapMode: Text.WordWrap
@@ -159,7 +159,7 @@ Dialog {
                     spacing: 10
 
                     AnimatedButton {
-                        text: "更改 OneDrive 根目录"
+                        text: "更改 Cloud 工作目录"
                         enabled: !root.busy
                         onClicked: root.chooseRootClicked()
                     }

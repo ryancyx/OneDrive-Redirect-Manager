@@ -11,7 +11,7 @@ ApplicationWindow {
     minimumWidth: 1100
     minimumHeight: 720
     visible: true
-    title: "OneDrive Redirect Manager"
+    title: "Cloud Redirect Manager"
     color: "#f6f8fb"
 
     property bool controllerReady: typeof controller !== "undefined" && controller !== null
@@ -85,7 +85,7 @@ ApplicationWindow {
             return
         if (!hasRootValue) {
             settingsDialog.open()
-            showToast("请先设置 OneDrive 根目录。")
+            showToast("请先设置 Cloud 工作目录。")
             return
         }
         projectDialog.editMode = false
@@ -282,7 +282,7 @@ ApplicationWindow {
 
                 CheckBox {
                     id: deleteCloudCheckbox
-                    text: "同时删除 OneDrive 中的目标文件夹"
+                    text: "同时删除 Cloud 中的目标文件夹"
                     checked: false
                     onCheckedChanged: deleteConfirm.deleteCloud = checked
                 }
@@ -303,7 +303,7 @@ ApplicationWindow {
                     Text {
                         anchors.fill: parent
                         anchors.margins: 12
-                        text: "删除本地链接只删除 junction 入口，不删除 OneDrive 中的真实数据，也不会删除本地父目录。"
+                        text: "删除本地链接只删除 junction 入口，不删除 Cloud 工作目录中的真实数据，也不会删除本地父目录。"
                         color: "#9a3412"
                         font.pixelSize: 12
                         wrapMode: Text.WordWrap
@@ -326,7 +326,7 @@ ApplicationWindow {
                         onClicked: {
                             if (deleteConfirm.deleteCloud) {
                                 var lines = []
-                                lines.push("即将删除 OneDrive 中的目标文件夹：")
+                                lines.push("即将删除 Cloud 中的目标文件夹：")
                                 lines.push("")
                                 lines.push(selectedCloudAbsolutePath())
                                 if (deleteConfirm.deleteLocalLink) {
@@ -335,7 +335,7 @@ ApplicationWindow {
                                     lines.push("")
                                     lines.push(selectedLocalPath())
                                     lines.push("")
-                                    lines.push("删除本地链接只会删除 junction 入口，不会删除 OneDrive 中的真实数据。")
+                                    lines.push("删除本地链接只会删除 junction 入口，不会删除 Cloud 工作目录中的真实数据。")
                                 }
                                 lines.push("")
                                 lines.push("此操作不可自动恢复。")
@@ -405,7 +405,7 @@ ApplicationWindow {
                         spacing: 10
 
                         Text {
-                            text: "OneDrive Redirect Manager"
+                            text: "Cloud Redirect Manager"
                             color: root.textMain
                             font.pixelSize: 30
                             font.weight: Font.Bold
@@ -430,7 +430,7 @@ ApplicationWindow {
 
                     Text {
                         Layout.fillWidth: true
-                        text: "轻量级 OneDrive 目录重定向工具"
+                        text: "轻量级 Cloud 目录重定向工具"
                         color: root.textSecond
                         font.pixelSize: 14
                         elide: Text.ElideRight
@@ -438,7 +438,7 @@ ApplicationWindow {
 
                     Text {
                         Layout.fillWidth: true
-                        text: "在数据原路径创建 junction 链接，真实数据保存到 OneDrive"
+                        text: "在数据原路径创建 junction 链接，真实数据保存到 Cloud 工作目录"
                         color: "#94a3b8"
                         font.pixelSize: 13
                         elide: Text.ElideRight
@@ -498,10 +498,10 @@ ApplicationWindow {
             Component {
                 id: emptyComponent
                 EmptyState {
-                    title: hasRootValue ? "还没有同步项目" : "请先设置 OneDrive 根目录"
+                    title: hasRootValue ? "还没有同步项目" : "请先设置 Cloud 工作目录"
                     description: hasRootValue
-                        ? "点击右上角“新建”，选择本地源文件夹和 OneDrive 路径。"
-                        : "打开右上角“设置”，选择一个 OneDrive 工作目录后再继续。"
+                        ? "点击右上角“新建”，选择本地源文件夹和 Cloud 路径。"
+                        : "打开右上角“设置”，选择一个 Cloud 工作目录后再继续。"
                 }
             }
 

@@ -52,7 +52,7 @@ Dialog {
                     Layout.fillWidth: true
                     spacing: 3
                     Text { text: "检测到冲突"; color: "#92400e"; font.pixelSize: 22; font.weight: Font.Bold }
-                    Text { text: "本地文件夹和 OneDrive 目标文件夹中都已有数据，需要选择保留哪一侧。"; color: "#9a3412"; font.pixelSize: 13; wrapMode: Text.WordWrap }
+                    Text { text: "本地文件夹和 Cloud 目标文件夹中都已有数据，需要选择保留哪一侧。"; color: "#9a3412"; font.pixelSize: 13; wrapMode: Text.WordWrap }
                 }
             }
         }
@@ -77,7 +77,7 @@ Dialog {
 
                     Text { text: "本地路径"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
                     Text { Layout.fillWidth: true; text: root.localPath; color: "#334155"; font.pixelSize: 13; wrapMode: Text.WrapAnywhere }
-                    Text { text: "OneDrive 路径"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
+                    Text { text: "Cloud 路径"; color: "#64748b"; font.pixelSize: 12; font.weight: Font.Bold }
                     Text { Layout.fillWidth: true; text: root.cloudPath; color: "#334155"; font.pixelSize: 13; wrapMode: Text.WrapAnywhere }
                 }
             }

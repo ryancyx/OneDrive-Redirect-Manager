@@ -44,7 +44,7 @@ class SettingsStore:
         return self.appdata_root / "logs"
 
     def _read_json_utf8(self) -> dict[str, Any]:
-        with self.settings_path.open("r", encoding="utf-8") as handle:
+        with self.settings_path.open("r", encoding="utf-8-sig") as handle:
             return json.load(handle)
 
     def _write_json_utf8(self, data: dict[str, Any]) -> None:

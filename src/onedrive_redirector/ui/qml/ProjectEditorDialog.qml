@@ -60,7 +60,7 @@ Dialog {
         nameField.text = root.nameValue
         localField.text = root.localPathValue
         cloudField.text = root.cloudPathValue || "data/"
-        cloudHint.text = "相对 OneDrive 根目录，建议放在 data/ 下"
+        cloudHint.text = "相对 Cloud 工作目录，建议放在 data/ 下"
     }
 
     FolderDialog {
@@ -73,7 +73,7 @@ Dialog {
 
     FolderDialog {
         id: cloudFolderDialog
-        title: "选择 OneDrive 中的目标文件夹"
+        title: "选择 Cloud 中的目标文件夹"
         onAccepted: {
             var absPath = root.pathFromUrl(selectedFolder)
             var relPath = root.relativeToRoot(absPath)
@@ -81,7 +81,7 @@ Dialog {
                 cloudField.text = relPath
                 cloudHint.text = "已转换为相对路径：" + relPath
             } else {
-                cloudHint.text = "请选择 OneDrive 根目录内部文件夹，或手动填写 data/xxx"
+                cloudHint.text = "请选择 Cloud 工作目录内部文件夹，或手动填写 data/xxx"
             }
         }
     }
@@ -125,7 +125,7 @@ Dialog {
 
                     Text {
                         Layout.fillWidth: true
-                        text: "本地路径会成为 junction 链接入口，真实文件保存在 OneDrive 目标路径中。"
+                        text: "本地路径会成为 junction 链接入口，真实文件保存在 Cloud 目标路径中。"
                         color: "#64748b"
                         font.pixelSize: 13
                         wrapMode: Text.NoWrap
@@ -266,7 +266,7 @@ Dialog {
                             Layout.preferredWidth: 470
                             Layout.maximumWidth: 500
                             spacing: 7
-                            Text { text: "OneDrive 中的路径"; color: "#1f2937"; font.pixelSize: 14; font.weight: Font.Bold }
+                            Text { text: "Cloud 中的路径"; color: "#1f2937"; font.pixelSize: 14; font.weight: Font.Bold }
 
                             RowLayout {
                                 Layout.fillWidth: true
@@ -296,7 +296,7 @@ Dialog {
                         Text {
                             id: cloudHint
                             Layout.fillWidth: true
-                            text: "相对 OneDrive 根目录，建议放在 data/ 下"
+                            text: "相对 Cloud 工作目录，建议放在 data/ 下"
                             color: "#64748b"
                             font.pixelSize: 12
                             wrapMode: Text.WordWrap
